@@ -2,9 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DevelopingYou.API.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -27,6 +29,12 @@ namespace DevelopingYou.API
 
             // TODO:
             // Insert DBContext here and setup default connection string in appsettings.json
+            services.AddDbContext<DiscoveringYouDBContext>(options =>
+            {
+                string connectionString = Configuration
+                    .GetConnectionString("DefaultConnection");
+                options.UseSqlServer(connectionString);
+            });
 
             // TODO:
             // Insert dependency injection here
