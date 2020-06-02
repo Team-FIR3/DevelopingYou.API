@@ -52,9 +52,20 @@ namespace DevelopingYou.API.Data.DatabaseRepositories
             return instance;
         }
 
-        public Task<IEnumerable<InstanceDTO>> GetInstances()
+        public async Task<IEnumerable<InstanceDTO>> GetInstances()
         {
-            throw new NotImplementedException();
+            var instances = await _context.Instance
+                .Select(instance => new InstanceDTO
+                {
+                    Id = instance.Id,
+                    Date = instance.Date,
+                    StartTime = instance.StartTime,
+                    EndTime = instance.EndTime,
+                    Comment = instance.Comment,
+
+                })
+                .ToListAsync();
+            return instances;
         }
 
         public Task<InstanceDTO> SaveNewInstance(Instance instance)
