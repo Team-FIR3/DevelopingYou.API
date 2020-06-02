@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace DevelopingYou.API.Data.DatabaseRepositories
 {
@@ -75,9 +77,25 @@ namespace DevelopingYou.API.Data.DatabaseRepositories
             return instance;
         }
 
-        public Task<bool> UpdateInstance(int id, Instance instance)
+        public async Task<bool> UpdateInstance(int id, Instance instance)
         {
-            throw new NotImplementedException();
+            _context.Entry(instance).State = EntityState.Modified;
+            try
+            {
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch(DbUpdateConcurrencyException)
+            {
+                if(!InstanceExists(id))
+                {
+                    return false;
+                }
+                else
+                {
+                    throw;
+                }
+            }
         }
 
         public bool InstanceExists(int id)
