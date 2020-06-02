@@ -26,6 +26,6 @@ namespace DevelopingYou.API.Data
         }
 
         public DbSet<Goal> Goals { get; set; }
-        public DbSet<Instance> Instances { get; set; }
+        //public DbSet<Instance> Instances { get; set; }
     }
 }
