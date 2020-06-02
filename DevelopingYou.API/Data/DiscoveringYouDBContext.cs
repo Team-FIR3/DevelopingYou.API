@@ -19,6 +19,7 @@ namespace DevelopingYou.API.Data
                 .HasData(new Goal
                 {
                     Id = 1,
+                    Title = "Less social media",
                     StartValue = 5,
                     TargetValue = 2,
                     Category = Category.Technological,
