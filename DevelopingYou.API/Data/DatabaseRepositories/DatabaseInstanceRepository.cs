@@ -68,9 +68,11 @@ namespace DevelopingYou.API.Data.DatabaseRepositories
             return instances;
         }
 
-        public Task<InstanceDTO> SaveNewInstance(Instance instance)
+        public async Task<InstanceDTO> SaveNewInstance(Instance instance)
         {
-            throw new NotImplementedException();
+            _context.Instance.Add(instance);
+            await _context.SaveChangesAsync();
+            return instance;
         }
 
         public Task<bool> UpdateInstance(int id, Instance instance)
