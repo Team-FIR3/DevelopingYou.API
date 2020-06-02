@@ -47,5 +47,23 @@ namespace DevelopingYou.API.Controllers
 
             return CreatedAtAction("GetGoal", new { id = goal.Id }, goal);
         }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutGoal(int id, Goal goal)
+        {
+            if (id != goal.Id)
+            {
+                return BadRequest();
+            }
+
+            bool updatedGoal = await goalRepository.UpdateGoal(id, goal);
+
+            if (!updatedGoal)
+            {
+                return NotFound();
+            }
+
+            return NoContent();
+        }
     }
 }

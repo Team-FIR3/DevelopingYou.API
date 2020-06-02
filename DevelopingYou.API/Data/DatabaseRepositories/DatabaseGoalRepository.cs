@@ -78,6 +78,31 @@ namespace DevelopingYou.API.Data.DatabaseRepositories
             await _context.SaveChangesAsync();
             return goal;
         }
-        
+
+        public async Task<bool> UpdateGoal(int id, Goal goal)
+        {
+            _context.Entry(goal).State = EntityState.Modified;
+            try
+            {
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!GoalExists(id))
+                {
+                    return false;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+        }
+
+        private bool GoalExists(int id)
+        {
+            return _context.Goal.Any(g => g.Id == id);
+        }
     }
 }
