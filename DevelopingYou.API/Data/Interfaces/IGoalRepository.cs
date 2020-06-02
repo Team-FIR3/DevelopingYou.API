@@ -16,5 +16,7 @@ namespace DevelopingYou.API.Data.Interfaces
         Task<Goal> SaveNewGoal(Goal goal);
 
         Task<bool> UpdateGoal(int id, Goal goal);
+
+        Task <Goal> DeleteGoal(int id);
     }
 }

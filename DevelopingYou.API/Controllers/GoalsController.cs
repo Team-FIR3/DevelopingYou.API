@@ -65,5 +65,18 @@ namespace DevelopingYou.API.Controllers
 
             return NoContent();
         }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Goal>> DeleteGoal(int id)
+        {
+            var goal = await goalRepository.DeleteGoal(id);
+
+            if(goal == null)
+            {
+                return NotFound();
+            }
+
+            return goal;
+        }
     }
 }

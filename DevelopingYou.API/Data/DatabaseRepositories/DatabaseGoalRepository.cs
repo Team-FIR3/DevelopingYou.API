@@ -104,5 +104,17 @@ namespace DevelopingYou.API.Data.DatabaseRepositories
         {
             return _context.Goal.Any(g => g.Id == id);
         }
+
+        public async Task<Goal> DeleteGoal(int id)
+        {
+            var goal = await _context.Goal.FindAsync(id);
+            if (goal == null)
+            {
+                return null;
+            }
+            _context.Goal.Remove(goal);
+            await _context.SaveChangesAsync();
+            return goal;
+        }
     }
 }
