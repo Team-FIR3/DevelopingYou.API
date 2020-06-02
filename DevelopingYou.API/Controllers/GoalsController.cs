@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DevelopingYou.API.Data.Interfaces;
+using DevelopingYou.API.Models;
 using DevelopingYou.API.Models.DTOs;
 using Microsoft.AspNetCore.Mvc;
 
@@ -37,6 +38,14 @@ namespace DevelopingYou.API.Controllers
             }
 
             return goal;
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<Goal>> PostGoal(Goal goal)
+        {
+            await goalRepository.SaveNewGoal(goal);
+
+            return CreatedAtAction("GetGoal", new { id = goal.Id }, goal);
         }
     }
 }

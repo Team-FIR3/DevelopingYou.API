@@ -1,4 +1,5 @@
 ﻿using DevelopingYou.API.Data.Interfaces;
+using DevelopingYou.API.Models;
 using DevelopingYou.API.Models.DTOs;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -70,5 +71,13 @@ namespace DevelopingYou.API.Data.DatabaseRepositories
 
             return goal;
         }
+
+        public async Task<Goal> SaveNewGoal(Goal goal)
+        {
+            _context.Goal.Add(goal);
+            await _context.SaveChangesAsync();
+            return goal;
+        }
+        
     }
 }
