@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DevelopingYou.API.Models.DTOs;
 
 namespace DevelopingYou.API.Data.Interfaces
 {
      public interface IGoalRepository
     {
+        Task<IEnumerable<GoalDTO>> GetGoals();
+
     }
 }
