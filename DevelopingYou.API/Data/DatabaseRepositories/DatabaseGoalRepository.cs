@@ -28,9 +28,19 @@ namespace DevelopingYou.API.Data.DatabaseRepositories
                     StartValue = goal.StartValue,
                     TargetValue = goal.TargetValue,
                     Category = goal.Category,
+                    Instances = goal.Instances
+                    .Select(instance => new InstanceDTO
+                    {
+                        Id = instance.Id,
+                        StartTime = instance.StartTime,
+                        EndTime = instance.EndTime,
+                        Comment = instance.Comment,
 
+                    })
+                .ToList()
                 })
                 .ToListAsync();
+
             return goals;
         }
     }
