@@ -72,5 +72,20 @@ namespace DevelopingYou.API.Controllers
 
         }
 
+        //Delete
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Instance>> DeleteInstance(int id)
+        {
+            var instance = await instanceRepository.DeleteInstance(id);
+
+            if (instance == null)
+            {
+                return NotFound();
+            }
+
+            return instance;
+        }
+
+
     }
 }
