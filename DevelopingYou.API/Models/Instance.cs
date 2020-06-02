@@ -8,7 +8,7 @@ namespace DevelopingYou.API.Models
 {
     public class Instance
     {
-        public int GoalId { get; set; }
+        public int Id { get; set; }
 
         [Display(Name = "Date")]
         public DateTime Date { get; set; }

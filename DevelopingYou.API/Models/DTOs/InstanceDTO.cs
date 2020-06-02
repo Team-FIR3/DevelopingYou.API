@@ -7,7 +7,7 @@ namespace DevelopingYou.API.Models.DTOs
 {
     public class InstanceDTO
     {
-        public int GoalId { get; set; }
+        public int Id { get; set; }
 
         public DateTime Date { get; set; }
 
