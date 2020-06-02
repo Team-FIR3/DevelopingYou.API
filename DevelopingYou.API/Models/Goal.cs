@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using DevelopingYou.API.Models.DTOs;
 
 namespace DevelopingYou.API.Models
 {
@@ -23,6 +24,9 @@ namespace DevelopingYou.API.Models
 
 
         public Category Category { get; set; }
+
+        public ICollection<Instance> Instances { get; set; }
+
     }
 
 

@@ -24,6 +24,7 @@ namespace DevelopingYou.API.Data
                     TargetValue = 2,
                     Category = Category.Technological,
                 });
+
             modelBuilder.Entity<Instance>()
                 .HasData(new Instance
                   {
