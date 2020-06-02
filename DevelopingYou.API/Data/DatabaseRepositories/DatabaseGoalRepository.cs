@@ -43,5 +43,32 @@ namespace DevelopingYou.API.Data.DatabaseRepositories
 
             return goals;
         }
+
+        public async Task<GoalDTO> GetGoalById(int id)
+        {
+            var goal = await _context.Goal
+                .Select(goal => new GoalDTO
+                {
+                    Id = goal.Id,
+                    UserId = goal.UserId,
+                    Title = goal.Title,
+                    StartValue = goal.StartValue,
+                    TargetValue = goal.TargetValue,
+                    Category = goal.Category,
+                    Instances = goal.Instances
+                    .Select(instance => new InstanceDTO
+                    {
+                        Id = instance.Id,
+                        StartTime = instance.StartTime,
+                        EndTime = instance.EndTime,
+                        Comment = instance.Comment,
+
+                    })
+                .ToList()
+                })
+                .FirstOrDefaultAsync(goal => goal.Id == id);
+
+            return goal;
+        }
     }
 }

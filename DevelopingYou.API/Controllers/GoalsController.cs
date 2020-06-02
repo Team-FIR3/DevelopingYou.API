@@ -25,5 +25,18 @@ namespace DevelopingYou.API.Controllers
         {
             return Ok(await goalRepository.GetGoals());
         }
+
+        [HttpGet ("{id}")]
+        public async Task<ActionResult<GoalDTO>> GetGoalById(int id)
+        {
+            GoalDTO goal = await goalRepository.GetGoalById(id);
+
+            if(goal == null)
+            {
+                return NotFound();
+            }
+
+            return goal;
+        }
     }
 }

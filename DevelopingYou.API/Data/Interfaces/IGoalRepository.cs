@@ -10,5 +10,6 @@ namespace DevelopingYou.API.Data.Interfaces
     {
         Task<IEnumerable<GoalDTO>> GetGoals();
 
+        Task<GoalDTO> GetGoalById(int id);
     }
 }
