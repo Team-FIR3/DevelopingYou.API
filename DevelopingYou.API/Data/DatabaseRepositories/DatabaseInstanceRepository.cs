@@ -68,7 +68,7 @@ namespace DevelopingYou.API.Data.DatabaseRepositories
             return instances;
         }
 
-        public async Task<InstanceDTO> SaveNewInstance(Instance instance)
+        public async Task<Instance> SaveNewInstance(Instance instance)
         {
             _context.Instance.Add(instance);
             await _context.SaveChangesAsync();
@@ -78,6 +78,11 @@ namespace DevelopingYou.API.Data.DatabaseRepositories
         public Task<bool> UpdateInstance(int id, Instance instance)
         {
             throw new NotImplementedException();
+        }
+
+        public bool InstanceExists(int id)
+        {
+            return _context.Instance.Any(e => e.Id == id);
         }
     }
 }
