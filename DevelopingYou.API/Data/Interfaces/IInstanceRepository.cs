@@ -18,7 +18,7 @@ namespace DevelopingYou.API.Data.Interfaces
 
         //Update
         Task<bool> UpdateInstance(int id, Instance instance);
-        Task<InstanceDTO> SaveNewInstance(Instance instance);
+        Task<Instance> SaveNewInstance(Instance instance);
 
         //Delete
         Task<Instance> DeleteInstance(int id);
