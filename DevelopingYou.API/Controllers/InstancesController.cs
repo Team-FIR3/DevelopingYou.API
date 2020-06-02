@@ -61,5 +61,16 @@ namespace DevelopingYou.API.Controllers
 
             return NoContent();
         }
+
+        //Post
+        [HttpPost]
+        public async Task<ActionResult<Instance>> PostInstance(Instance instance)
+        {
+            await instanceRepository.SaveNewInstance(instance);
+
+            return CreatedAtAction("GetInstance", new { id = instance.Id }, instance);
+
+        }
+
     }
 }
