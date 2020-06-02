@@ -10,17 +10,20 @@ namespace DevelopingYou.API.Models
     {
         public int Id { get; set; }
 
-        [Display(Name = "Date")]
+        public int GoalId { get; set; }
+
         public DateTime Date { get; set; }
 
-        [Display(Name = "Date Goal Started")]
         public DateTime StartTime { get; set; }
 
-        [Display(Name = "Ending Goal Time")]
         public DateTime EndTime { get; set; }
 
-        [Display(Name = "Comments")]
         public string Comment { get; set; }
+
+
+
+        [Required]
+        public Goal Goal { get; set; }
 
     }
 }
