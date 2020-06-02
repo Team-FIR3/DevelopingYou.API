@@ -41,11 +41,10 @@ namespace DevelopingYou.API
 
             // TODO:
             // Insert dependency injection here
-<<<<<<< HEAD
+
             services.AddTransient<IGoalRepository, DatabaseGoalRepository>();
-=======
             services.AddTransient<IInstanceRepository, DatabaseInstanceRepository>();
->>>>>>> master
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
