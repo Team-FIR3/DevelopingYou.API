@@ -12,11 +12,11 @@ namespace DevelopingYou.API.Models
 
         public int GoalId { get; set; }
 
-        public DateTime Date { get; set; }
+       // public string Date { get; set; }
 
-        public DateTime StartTime { get; set; }
+        public string StartTime { get; set; }
 
-        public DateTime EndTime { get; set; }
+        public string EndTime { get; set; }
 
         public string Comment { get; set; }
 
