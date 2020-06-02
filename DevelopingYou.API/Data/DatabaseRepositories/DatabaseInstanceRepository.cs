@@ -36,9 +36,20 @@ namespace DevelopingYou.API.Data.DatabaseRepositories
             return instance;
         }
 
-        public Task<InstanceDTO> GetInstanceById(int id)
+        public async Task<InstanceDTO> GetInstanceById(int id)
         {
-            throw new NotImplementedException();
+            var instance = await _context.Instance
+                .Select(instance => new InstanceDTO
+                {
+                    Id = instance.Id,
+                    Date = instance.Date,
+                    StartTime = instance.StartTime,
+                    EndTime = instance.EndTime,
+                    Comment = instance.Comment,
+
+                })
+                .FirstOrDefaultAsync(instance => instance.Id == id);
+            return instance;
         }
 
         public Task<IEnumerable<InstanceDTO>> GetInstances()
