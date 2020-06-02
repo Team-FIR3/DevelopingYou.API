@@ -2,15 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DevelopingYou.API.Data.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DevelopingYou.API.Controllers
 {
-    public class InstancesController : Controller
+    public class InstancesController : ControllerBase
     {
-        public IActionResult Index()
+        IInstanceRepository instanceRepository;
+
+        public InstancesController(IInstanceRepository instanceRepository)
         {
-            return View();
+            this.instanceRepository = instanceRepository;
         }
+
+        
     }
 }
