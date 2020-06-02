@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DevelopingYou.API.Data;
+using DevelopingYou.API.Data.DatabaseRepositories;
+using DevelopingYou.API.Data.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -38,6 +40,7 @@ namespace DevelopingYou.API
 
             // TODO:
             // Insert dependency injection here
+            services.AddTransient<IGoalRepository, DatabaseGoalRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
