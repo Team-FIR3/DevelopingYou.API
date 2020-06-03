@@ -45,7 +45,9 @@ namespace DevelopingYou.API.Controllers
         {
             await goalRepository.SaveNewGoal(goal);
 
-            return CreatedAtAction("GetGoal", new { id = goal.Id }, goal);
+            var goalDto = await goalRepository.GetGoalById(goal.Id);
+
+            return CreatedAtAction("GetGoal", new { id = goal.Id }, goalDto);
         }
 
         [HttpPut("{id}")]
