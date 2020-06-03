@@ -34,6 +34,7 @@ namespace DevelopingYou.API.Data.DatabaseRepositories
                     .Select(instance => new InstanceDTO
                     {
                         Id = instance.Id,
+                        GoalTitle = instance.Goal.Title,
                         StartTime = instance.StartTime,
                         EndTime = instance.EndTime,
                         Comment = instance.Comment,
@@ -63,7 +64,7 @@ namespace DevelopingYou.API.Data.DatabaseRepositories
                     .Select(instance => new InstanceDTO
                     {
                         Id = instance.Id,
-                        GoalTitle = instance.GoalTitle,
+                        GoalTitle = instance.Goal.Title,
                         StartTime = instance.StartTime,
                         EndTime = instance.EndTime,
                         Comment = instance.Comment,

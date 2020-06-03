@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace DevelopingYou.API.Controllers
 {
 
-    [Route("api/[controller]")]
+    [Route("api/Goals/{GoalId}/Instances")]
     [ApiController]
     public class InstancesController : ControllerBase
     {
@@ -62,11 +62,11 @@ namespace DevelopingYou.API.Controllers
 
         //Post
         [HttpPost]
-        public async Task<ActionResult<Instance>> PostInstance(Instance instance)
+        public async Task<ActionResult<InstanceDTO>> PostInstance(int goalId, CreateInstance instanceData)
         {
-            await instanceRepository.SaveNewInstance(instance);
+            var instance = await instanceRepository.SaveNewInstance(goalId, instanceData);
 
-            return CreatedAtAction("GetInstance", new { id = instance.Id }, instance);
+            return CreatedAtAction("GetInstance", new { instance.Id }, instance);
 
         }
 

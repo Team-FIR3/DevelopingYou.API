@@ -4,6 +4,7 @@ using DevelopingYou.API.Models.DTOs;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 
@@ -16,13 +17,6 @@ namespace DevelopingYou.API.Data.DatabaseRepositories
         public DatabaseInstanceRepository(DiscoveringYouDBContext context)
         {
             _context = context;
-        }
-
-        public async Task<Instance> CreateInstance(Instance instance)
-        {
-            _context.Instance.Add(instance);
-            await _context.SaveChangesAsync();
-            return instance;
         }
 
         public async Task<Instance> DeleteInstance(int id)
@@ -68,11 +62,20 @@ namespace DevelopingYou.API.Data.DatabaseRepositories
             return instances;
         }
 
-        public async Task<Instance> SaveNewInstance(Instance instance)
+        public async Task<InstanceDTO> SaveNewInstance(int id, CreateInstance instanceData)
         {
+            var instance = new Instance
+            {
+                GoalId = id,
+                StartTime = instanceData.StartTime,
+                EndTime = instanceData.EndTime,
+                Comment = instanceData.Comment,
+            };
+
             _context.Instance.Add(instance);
             await _context.SaveChangesAsync();
-            return instance;
+            var newInstance = await GetInstanceById(instance.Id);
+            return newInstance;
         }
 
         public async Task<bool> UpdateInstance(int id, Instance instance)
