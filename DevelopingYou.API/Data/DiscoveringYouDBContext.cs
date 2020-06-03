@@ -32,16 +32,16 @@ namespace DevelopingYou.API.Data
                   {
                       Id = 1,
                       GoalId = 1,
-                      StartTime = "2020-06-01 09:41:23",
-                      EndTime = "2020-06-01 13:41:23",
-                      Comment = "Played Candy Crush instead of coding, could have utilized my time better",
+                      StartTime = new DateTime(2020, 6, 13, 4, 30, 12, 000, DateTimeKind.Utc),
+                      EndTime = new DateTime(2020, 6, 13, 4, 45, 12, 000, DateTimeKind.Utc),
+                    Comment = "Played Candy Crush instead of coding, could have utilized my time better",
                 },
                 new Instance
                 {
                     Id = 2,
                     GoalId = 1,
-                    StartTime = "2020-06-02 11:41:23",
-                    EndTime = "2020-06-02 12:41:23",
+                    StartTime = new DateTime(2020, 6, 13, 6, 05, 12, 000, DateTimeKind.Utc),
+                    EndTime = new DateTime(2020, 6, 13, 7, 00, 12, 000, DateTimeKind.Utc),
                     Comment = "Video called sister and nephew, was fun",
 
                 },
@@ -49,8 +49,8 @@ namespace DevelopingYou.API.Data
                 {
                       Id = 3,
                       GoalId = 1,
-                      StartTime = "2020-06-02 07:15:11",
-                      EndTime = "2020-06-02 9:41:33",
+                      StartTime = new DateTime(2020, 6, 13, 9, 00, 12, 000, DateTimeKind.Utc),
+                    EndTime = new DateTime(2020, 6, 13, 10, 00, 12, 000, DateTimeKind.Utc),
                       Comment = "Coffee Zoom Meeting, beneficial networking",
                 }
                 ) ;
