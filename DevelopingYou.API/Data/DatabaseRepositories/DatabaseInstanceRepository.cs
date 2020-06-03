@@ -1,11 +1,11 @@
 ﻿using DevelopingYou.API.Data.Interfaces;
 using DevelopingYou.API.Models;
 using DevelopingYou.API.Models.DTOs;
-using System;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 
 
 namespace DevelopingYou.API.Data.DatabaseRepositories
@@ -19,17 +19,10 @@ namespace DevelopingYou.API.Data.DatabaseRepositories
             _context = context;
         }
 
-        public async Task<Instance> CreateInstance(Instance instance)
-        {
-            _context.Instance.Add(instance);
-            await _context.SaveChangesAsync();
-            return instance;
-        }
-
         public async Task<Instance> DeleteInstance(int id)
         {
             var instance = await _context.Instance.FindAsync(id);
-            if ( instance == null)
+            if (instance == null)
             {
                 return null;
             }
@@ -44,7 +37,7 @@ namespace DevelopingYou.API.Data.DatabaseRepositories
                 .Select(instance => new InstanceDTO
                 {
                     Id = instance.Id,
-                  
+                    GoalTitle = instance.Goal.Title,
                     StartTime = instance.StartTime,
                     EndTime = instance.EndTime,
                     Comment = instance.Comment,
@@ -69,11 +62,20 @@ namespace DevelopingYou.API.Data.DatabaseRepositories
             return instances;
         }
 
-        public async Task<Instance> SaveNewInstance(Instance instance)
+        public async Task<InstanceDTO> SaveNewInstance(int id, CreateInstance instanceData)
         {
+            var instance = new Instance
+            {
+                GoalId = id,
+                StartTime = instanceData.StartTime,
+                EndTime = instanceData.EndTime,
+                Comment = instanceData.Comment,
+            };
+
             _context.Instance.Add(instance);
             await _context.SaveChangesAsync();
-            return instance;
+            var newInstance = await GetInstanceById(instance.Id);
+            return newInstance;
         }
 
         public async Task<bool> UpdateInstance(int id, Instance instance)
@@ -84,9 +86,9 @@ namespace DevelopingYou.API.Data.DatabaseRepositories
                 await _context.SaveChangesAsync();
                 return true;
             }
-            catch(DbUpdateConcurrencyException)
+            catch (DbUpdateConcurrencyException)
             {
-                if(!InstanceExists(id))
+                if (!InstanceExists(id))
                 {
                     return false;
                 }

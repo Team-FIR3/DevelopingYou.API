@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using DevelopingYou.API.Models;
+﻿using DevelopingYou.API.Models;
 using DevelopingYou.API.Models.DTOs;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace DevelopingYou.API.Data.Interfaces
 {
-     public interface IGoalRepository
+    public interface IGoalRepository
     {
         Task<IEnumerable<GoalDTO>> GetGoals();
 
@@ -17,6 +15,6 @@ namespace DevelopingYou.API.Data.Interfaces
 
         Task<bool> UpdateGoal(int id, Goal goal);
 
-        Task <Goal> DeleteGoal(int id);
+        Task<Goal> DeleteGoal(int id);
     }
 }

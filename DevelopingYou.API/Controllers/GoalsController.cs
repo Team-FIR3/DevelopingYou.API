@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using DevelopingYou.API.Data.Interfaces;
+﻿using DevelopingYou.API.Data.Interfaces;
 using DevelopingYou.API.Models;
 using DevelopingYou.API.Models.DTOs;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace DevelopingYou.API.Controllers
 {
@@ -27,12 +25,12 @@ namespace DevelopingYou.API.Controllers
             return Ok(await goalRepository.GetGoals());
         }
 
-        [HttpGet ("{id}")]
+        [HttpGet("{id}")]
         public async Task<ActionResult<GoalDTO>> GetGoalById(int id)
         {
             GoalDTO goal = await goalRepository.GetGoalById(id);
 
-            if(goal == null)
+            if (goal == null)
             {
                 return NotFound();
             }
@@ -71,7 +69,7 @@ namespace DevelopingYou.API.Controllers
         {
             var goal = await goalRepository.DeleteGoal(id);
 
-            if(goal == null)
+            if (goal == null)
             {
                 return NotFound();
             }

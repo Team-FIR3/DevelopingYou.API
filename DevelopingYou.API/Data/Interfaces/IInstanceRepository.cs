@@ -1,16 +1,12 @@
 ﻿using DevelopingYou.API.Models;
 using DevelopingYou.API.Models.DTOs;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace DevelopingYou.API.Data.Interfaces
 {
     public interface IInstanceRepository
     {
-        //Create
-        Task<Instance> CreateInstance(Instance instance);
 
         //Read
         Task<InstanceDTO> GetInstanceById(int id);
@@ -18,7 +14,7 @@ namespace DevelopingYou.API.Data.Interfaces
 
         //Update
         Task<bool> UpdateInstance(int id, Instance instance);
-        Task<Instance> SaveNewInstance(Instance instance);
+        Task<InstanceDTO> SaveNewInstance(int id, CreateInstance instanceData);
 
         //Delete
         Task<Instance> DeleteInstance(int id);

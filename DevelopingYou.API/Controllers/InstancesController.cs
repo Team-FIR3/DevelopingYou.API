@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using DevelopingYou.API.Data.Interfaces;
+﻿using DevelopingYou.API.Data.Interfaces;
 using DevelopingYou.API.Models;
 using DevelopingYou.API.Models.DTOs;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace DevelopingYou.API.Controllers
 {
 
-    [Route("api/[controller]")]
+    [Route("api/Goals/{GoalId}/Instances")]
     [ApiController]
     public class InstancesController : ControllerBase
     {
@@ -34,7 +32,7 @@ namespace DevelopingYou.API.Controllers
         {
             InstanceDTO instance = await instanceRepository.GetInstanceById(id);
 
-            if(instance == null)
+            if (instance == null)
             {
                 return NotFound();
 
@@ -64,11 +62,11 @@ namespace DevelopingYou.API.Controllers
 
         //Post
         [HttpPost]
-        public async Task<ActionResult<Instance>> PostInstance(Instance instance)
+        public async Task<ActionResult<InstanceDTO>> PostInstance(int goalId, CreateInstance instanceData)
         {
-            await instanceRepository.SaveNewInstance(instance);
+            var instance = await instanceRepository.SaveNewInstance(goalId, instanceData);
 
-            return CreatedAtAction("GetInstance", new { id = instance.Id }, instance);
+            return CreatedAtAction("GetInstance", new { instance.Id }, instance);
 
         }
 
