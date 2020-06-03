@@ -22,6 +22,8 @@ namespace DevelopingYou.API.Data
                     Title = "Less social media",
                     StartValue = 5,
                     TargetValue = 2,
+                    StartDate = new DateTime(2020, 6, 12, 2, 45, 12, 000, DateTimeKind.Utc),
+                    EndDate = new DateTime(2020, 6, 16, 1, 45, 12, 000, DateTimeKind.Utc),
                     Category = Category.Technological,
                 });
 

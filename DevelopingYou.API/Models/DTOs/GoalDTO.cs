@@ -17,6 +17,10 @@ namespace DevelopingYou.API.Models.DTOs
 
         public decimal TargetValue { get; set; }
 
+        public DateTime StartDate { get; set; }
+
+        public DateTime EndDate { get; set; }
+
         public Category Category { get; set; }
 
         public List<InstanceDTO> Instances { get; set; }
