@@ -3,9 +3,15 @@
 Back end API and database for 401 midterm project.
 
 
+## Motivation
+
+The build of this project orgininated by the cause of the developers wanting to see people find the best in themselves. Wanting to create a tool for users to help take their goals from their mind and commit them to a working app to better drive sustainability in achieving those goals. 
+
+
 ## Badges
 
 ![.NET Core](https://github.com/Team-FIR3/DevelopingYou.API/workflows/.NET%20Core/badge.svg)  
+
 
 ## Installation
 
@@ -28,7 +34,6 @@ Microsoft.EntityFrameworkCore.Tools
 ```
 
 
-
 ## Entity Relationship Diagram
 [ERD](/assets/ERD.jpg)
 
@@ -38,6 +43,4 @@ Each goal can contain many instances, which include a date, a start time, an end
 
 We, the developers at Developing You are also working towards a strategy table that would be connected to the goals table. 
 This would, in theory, allow users to have helpful links, ideas or other useful strategies to consume so they can progress towards their goal seemlessly.  
-
-
 
