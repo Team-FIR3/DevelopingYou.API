@@ -4,14 +4,16 @@ using DevelopingYou.API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DevelopingYou.API.Migrations
 {
     [DbContext(typeof(DiscoveringYouDBContext))]
-    partial class DiscoveringYouDBContextModelSnapshot : ModelSnapshot
+    [Migration("20200603160713_start-end-dates")]
+    partial class startenddates
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -76,14 +78,14 @@ namespace DevelopingYou.API.Migrations
                     b.Property<string>("Comment")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("EndTime")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("EndTime")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("GoalId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("StartTime")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("StartTime")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -96,25 +98,25 @@ namespace DevelopingYou.API.Migrations
                         {
                             Id = 1,
                             Comment = "Played Candy Crush instead of coding, could have utilized my time better",
-                            EndTime = new DateTime(2020, 6, 13, 4, 45, 12, 0, DateTimeKind.Utc),
+                            EndTime = "2020-06-01 13:41:23",
                             GoalId = 1,
-                            StartTime = new DateTime(2020, 6, 13, 4, 30, 12, 0, DateTimeKind.Utc)
+                            StartTime = "2020-06-01 09:41:23"
                         },
                         new
                         {
                             Id = 2,
                             Comment = "Video called sister and nephew, was fun",
-                            EndTime = new DateTime(2020, 6, 13, 7, 0, 12, 0, DateTimeKind.Utc),
+                            EndTime = "2020-06-02 12:41:23",
                             GoalId = 1,
-                            StartTime = new DateTime(2020, 6, 13, 6, 5, 12, 0, DateTimeKind.Utc)
+                            StartTime = "2020-06-02 11:41:23"
                         },
                         new
                         {
                             Id = 3,
                             Comment = "Coffee Zoom Meeting, beneficial networking",
-                            EndTime = new DateTime(2020, 6, 13, 10, 0, 12, 0, DateTimeKind.Utc),
+                            EndTime = "2020-06-02 9:41:33",
                             GoalId = 1,
-                            StartTime = new DateTime(2020, 6, 13, 9, 0, 12, 0, DateTimeKind.Utc)
+                            StartTime = "2020-06-02 07:15:11"
                         });
                 });
 

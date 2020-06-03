@@ -28,6 +28,8 @@ namespace DevelopingYou.API.Data.DatabaseRepositories
                     Title = goal.Title,
                     StartValue = goal.StartValue,
                     TargetValue = goal.TargetValue,
+                    StartDate = goal.StartDate,
+                    EndDate = goal.EndDate,
                     Category = goal.Category,
                     Instances = goal.Instances
                     .Select(instance => new InstanceDTO
@@ -55,6 +57,8 @@ namespace DevelopingYou.API.Data.DatabaseRepositories
                     Title = goal.Title,
                     StartValue = goal.StartValue,
                     TargetValue = goal.TargetValue,
+                    StartDate = goal.StartDate,
+                    EndDate = goal.EndDate,
                     Category = goal.Category,
                     Instances = goal.Instances
                     .Select(instance => new InstanceDTO

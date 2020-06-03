@@ -22,6 +22,11 @@ namespace DevelopingYou.API.Models
         [Required]
         public decimal TargetValue { get; set; }
 
+        [Required]
+        public DateTime StartDate { get; set; }
+
+        [Required]
+        public DateTime EndDate { get; set; }
 
         public Category Category { get; set; }
 
