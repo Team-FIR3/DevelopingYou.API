@@ -2,7 +2,6 @@
 using DevelopingYou.API.Models;
 using DevelopingYou.API.Models.DTOs;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -64,6 +63,7 @@ namespace DevelopingYou.API.Data.DatabaseRepositories
                     .Select(instance => new InstanceDTO
                     {
                         Id = instance.Id,
+                        GoalTitle = instance.GoalTitle,
                         StartTime = instance.StartTime,
                         EndTime = instance.EndTime,
                         Comment = instance.Comment,

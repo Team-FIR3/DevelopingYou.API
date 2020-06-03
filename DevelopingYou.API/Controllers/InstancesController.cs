@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using DevelopingYou.API.Data.Interfaces;
+﻿using DevelopingYou.API.Data.Interfaces;
 using DevelopingYou.API.Models;
 using DevelopingYou.API.Models.DTOs;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace DevelopingYou.API.Controllers
 {
@@ -34,7 +32,7 @@ namespace DevelopingYou.API.Controllers
         {
             InstanceDTO instance = await instanceRepository.GetInstanceById(id);
 
-            if(instance == null)
+            if (instance == null)
             {
                 return NotFound();
 
