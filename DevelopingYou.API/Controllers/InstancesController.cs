@@ -73,7 +73,7 @@ namespace DevelopingYou.API.Controllers
 
         //Delete
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Instance>> DeleteInstance(int id)
+        public async Task<ActionResult<InstanceDTO>> DeleteInstance(int id)
         {
             var instance = await instanceRepository.DeleteInstance(id);
 

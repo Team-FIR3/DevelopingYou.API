@@ -20,17 +20,7 @@ namespace DevelopingYou.API.Data.DatabaseRepositories
             _context = context;
         }
 
-        public async Task<Instance> DeleteInstance(int id)
-        {
-            var instance = await _context.Instance.FindAsync(id);
-            if (instance == null)
-            {
-                return null;
-            }
-            _context.Instance.Remove(instance);
-            await _context.SaveChangesAsync();
-            return instance;
-        }
+      
 
         public async Task<InstanceDTO> GetInstanceById(int id)
         {
@@ -95,7 +85,19 @@ namespace DevelopingYou.API.Data.DatabaseRepositories
             return true;
             
         }
+        public async Task<InstanceDTO> DeleteInstance(int id)
+        {
+            var instance = await _context.Instance.FirstOrDefaultAsync(instance => instance.Id == id);
+            if (instance == null)
+            {
+                return null;
+            }
+            var instanceToReturn = await GetInstanceById(id);
+            _context.Instance.Remove(instance);
+            await _context.SaveChangesAsync();
+            return instanceToReturn;
+        }
 
-     
+
     }
 }
