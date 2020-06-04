@@ -43,14 +43,14 @@ namespace DevelopingYou.API.Controllers
 
         //Put
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutInstance(int id, Instance instance)
+        public async Task<IActionResult> PutInstance(int id, CreateInstance instanceData)
         {
-            if (id != instance.Id)
+            if (id != instanceData.Id)
             {
                 return BadRequest();
             }
 
-            bool updatedInstance = await instanceRepository.UpdateInstance(id, instance);
+            bool updatedInstance = await instanceRepository.UpdateInstance(id, instanceData);
 
             if (!updatedInstance)
             {
