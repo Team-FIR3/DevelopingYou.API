@@ -13,7 +13,7 @@ namespace DevelopingYou.API.Data.Interfaces
         Task<IEnumerable<InstanceDTO>> GetInstances();
 
         //Update
-        Task<bool> UpdateInstance(int id, Instance instance);
+        Task<bool> UpdateInstance(int id, CreateInstance instanceData);
         Task<InstanceDTO> SaveNewInstance(int id, CreateInstance instanceData);
 
         //Delete
