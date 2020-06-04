@@ -2,6 +2,7 @@
 using DevelopingYou.API.Models;
 using DevelopingYou.API.Models.DTOs;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -78,7 +79,7 @@ namespace DevelopingYou.API.Data.DatabaseRepositories
             return newInstance;
         }
 
-        public async Task<bool> UpdateInstance(int id, CreateInstance instanceData)
+        public async Task<bool> UpdateInstance(int id, DateTime startTime, CreateInstance instanceData)
         {
             var instance = await _context.Instance
                 .FirstOrDefaultAsync(instance => instance.Id == id && instance.StartTime == instanceData.StartTime);

@@ -51,7 +51,7 @@ namespace DevelopingYou.API.Controllers
                 return BadRequest();
             }
 
-            bool updatedInstance = await instanceRepository.UpdateInstance(id, instanceData);
+            bool updatedInstance = await instanceRepository.UpdateInstance(id, startTime, instanceData);
 
             if (!updatedInstance)
             {
