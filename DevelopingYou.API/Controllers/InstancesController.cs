@@ -2,6 +2,7 @@
 using DevelopingYou.API.Models;
 using DevelopingYou.API.Models.DTOs;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -43,14 +44,14 @@ namespace DevelopingYou.API.Controllers
 
         //Put
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutInstance(int id, Instance instance)
+        public async Task<IActionResult> PutInstance(int id, DateTime startTime, CreateInstance instanceData)
         {
-            if (id != instance.Id)
+            if (startTime != instanceData.StartTime )
             {
                 return BadRequest();
             }
 
-            bool updatedInstance = await instanceRepository.UpdateInstance(id, instance);
+            bool updatedInstance = await instanceRepository.UpdateInstance(id, startTime, instanceData);
 
             if (!updatedInstance)
             {
@@ -72,7 +73,7 @@ namespace DevelopingYou.API.Controllers
 
         //Delete
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Instance>> DeleteInstance(int id)
+        public async Task<ActionResult<InstanceDTO>> DeleteInstance(int id)
         {
             var instance = await instanceRepository.DeleteInstance(id);
 

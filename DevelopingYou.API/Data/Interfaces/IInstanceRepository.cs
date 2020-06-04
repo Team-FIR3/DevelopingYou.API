@@ -1,5 +1,6 @@
 ﻿using DevelopingYou.API.Models;
 using DevelopingYou.API.Models.DTOs;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -13,11 +14,11 @@ namespace DevelopingYou.API.Data.Interfaces
         Task<IEnumerable<InstanceDTO>> GetInstances();
 
         //Update
-        Task<bool> UpdateInstance(int id, Instance instance);
+        Task<bool> UpdateInstance(int id,DateTime startTime, CreateInstance instanceData);
         Task<InstanceDTO> SaveNewInstance(int id, CreateInstance instanceData);
 
         //Delete
-        Task<Instance> DeleteInstance(int id);
+        Task<InstanceDTO> DeleteInstance(int id);
 
     }
 }

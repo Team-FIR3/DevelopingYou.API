@@ -2,6 +2,7 @@
 using DevelopingYou.API.Models;
 using DevelopingYou.API.Models.DTOs;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -19,17 +20,7 @@ namespace DevelopingYou.API.Data.DatabaseRepositories
             _context = context;
         }
 
-        public async Task<Instance> DeleteInstance(int id)
-        {
-            var instance = await _context.Instance.FindAsync(id);
-            if (instance == null)
-            {
-                return null;
-            }
-            _context.Instance.Remove(instance);
-            await _context.SaveChangesAsync();
-            return instance;
-        }
+      
 
         public async Task<InstanceDTO> GetInstanceById(int id)
         {
@@ -78,30 +69,35 @@ namespace DevelopingYou.API.Data.DatabaseRepositories
             return newInstance;
         }
 
-        public async Task<bool> UpdateInstance(int id, Instance instance)
+        public async Task<bool> UpdateInstance(int id, DateTime startTime, CreateInstance instanceData)
         {
+            var instance = await _context.Instance
+                .FirstOrDefaultAsync(instance => instance.Id == id && instance.StartTime == instanceData.StartTime);
+
+            if(instance is null) return false;
+            instance.StartTime = instanceData.StartTime;
+            instance.EndTime = instanceData.EndTime;
+            instance.Comment = instanceData.Comment;
+
             _context.Entry(instance).State = EntityState.Modified;
-            try
+
+            await _context.SaveChangesAsync();
+            return true;
+            
+        }
+        public async Task<InstanceDTO> DeleteInstance(int id)
+        {
+            var instance = await _context.Instance.FirstOrDefaultAsync(instance => instance.Id == id);
+            if (instance == null)
             {
-                await _context.SaveChangesAsync();
-                return true;
+                return null;
             }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!InstanceExists(id))
-                {
-                    return false;
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            var instanceToReturn = await GetInstanceById(id);
+            _context.Instance.Remove(instance);
+            await _context.SaveChangesAsync();
+            return instanceToReturn;
         }
 
-        public bool InstanceExists(int id)
-        {
-            return _context.Instance.Any(e => e.Id == id);
-        }
+
     }
 }
