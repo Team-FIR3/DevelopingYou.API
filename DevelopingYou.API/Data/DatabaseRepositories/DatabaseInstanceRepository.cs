@@ -78,30 +78,23 @@ namespace DevelopingYou.API.Data.DatabaseRepositories
             return newInstance;
         }
 
-        public async Task<bool> UpdateInstance(int id, Instance instance)
+        public async Task<bool> UpdateInstance(int id, CreateInstance instanceData)
         {
+            var instance = await _context.Instance
+                .FirstOrDefaultAsync(instance => instance.Id == id);
+
+            if(instance is null) return false;
+            instance.StartTime = instanceData.StartTime;
+            instance.EndTime = instanceData.EndTime;
+            instance.Comment = instanceData.Comment;
+
             _context.Entry(instance).State = EntityState.Modified;
-            try
-            {
-                await _context.SaveChangesAsync();
-                return true;
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!InstanceExists(id))
-                {
-                    return false;
-                }
-                else
-                {
-                    throw;
-                }
-            }
+
+            await _context.SaveChangesAsync();
+            return true;
+            
         }
 
-        public bool InstanceExists(int id)
-        {
-            return _context.Instance.Any(e => e.Id == id);
-        }
+     
     }
 }
