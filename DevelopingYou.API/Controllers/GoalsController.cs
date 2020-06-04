@@ -30,7 +30,7 @@ namespace DevelopingYou.API.Controllers
 
         public async Task<ActionResult<IEnumerable<GoalDTO>>> GetActiveGoals()
         {
-            return Ok(await goalRepository.GetGoals());
+            return Ok(await goalRepository.GetActiveGoals());
         }
 
         [HttpGet("{id}")]
