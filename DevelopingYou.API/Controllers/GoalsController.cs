@@ -20,7 +20,15 @@ namespace DevelopingYou.API.Controllers
 
         //Get api/Goals
         [HttpGet]
+
         public async Task<ActionResult<IEnumerable<GoalDTO>>> GetGoals()
+        {
+            return Ok(await goalRepository.GetGoals());
+        }
+
+        [HttpGet("Active")]
+
+        public async Task<ActionResult<IEnumerable<GoalDTO>>> GetActiveGoals()
         {
             return Ok(await goalRepository.GetGoals());
         }
