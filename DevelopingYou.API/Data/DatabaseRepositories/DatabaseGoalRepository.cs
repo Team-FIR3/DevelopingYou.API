@@ -2,6 +2,7 @@
 using DevelopingYou.API.Models;
 using DevelopingYou.API.Models.DTOs;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -120,6 +121,40 @@ namespace DevelopingYou.API.Data.DatabaseRepositories
             _context.Goal.Remove(goal);
             await _context.SaveChangesAsync();
             return goal;
+        }
+
+        public async Task<IEnumerable<GoalDTO>> GetActiveGoals()
+        {
+
+            var goals = await _context.Goal
+               .Select(goal => new GoalDTO
+               {
+                   Id = goal.Id,
+                   UserId = goal.UserId,
+                   Title = goal.Title,
+                   StartValue = goal.StartValue,
+                   TargetValue = goal.TargetValue,
+                   StartDate = goal.StartDate,
+                   EndDate = goal.EndDate,
+                   Category = goal.Category,
+                   Instances = goal.Instances
+                   .Select(instance => new InstanceDTO
+                   {
+                       Id = instance.Id,
+                       GoalTitle = instance.Goal.Title,
+                       StartTime = instance.StartTime,
+                       EndTime = instance.EndTime,
+                       Comment = instance.Comment,
+
+                   })
+               .ToList()
+               })
+               .Where(goal => goal.EndDate < DateTime.Now)
+               .OrderBy(goal => goal.StartDate)
+               .ToListAsync();
+
+            return goals;
+
         }
     }
 }
