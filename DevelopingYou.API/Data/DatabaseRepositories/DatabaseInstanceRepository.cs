@@ -81,7 +81,7 @@ namespace DevelopingYou.API.Data.DatabaseRepositories
         public async Task<bool> UpdateInstance(int id, CreateInstance instanceData)
         {
             var instance = await _context.Instance
-                .FirstOrDefaultAsync(instance => instance.Id == id);
+                .FirstOrDefaultAsync(instance => instance.Id == id && instance.StartTime == instanceData.StartTime);
 
             if(instance is null) return false;
             instance.StartTime = instanceData.StartTime;

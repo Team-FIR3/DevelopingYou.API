@@ -2,6 +2,7 @@
 using DevelopingYou.API.Models;
 using DevelopingYou.API.Models.DTOs;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -43,9 +44,9 @@ namespace DevelopingYou.API.Controllers
 
         //Put
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutInstance(int id, CreateInstance instanceData)
+        public async Task<IActionResult> PutInstance(int id, DateTime startTime, CreateInstance instanceData)
         {
-            if (id != instanceData.Id)
+            if (startTime != instanceData.StartTime )
             {
                 return BadRequest();
             }
