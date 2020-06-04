@@ -16,5 +16,6 @@ namespace DevelopingYou.API.Data.Interfaces
         Task<bool> UpdateGoal(int id, Goal goal);
 
         Task<Goal> DeleteGoal(int id);
+        Task<IEnumerable<GoalDTO>> GetActiveGoals();
     }
 }
