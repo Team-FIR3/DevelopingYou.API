@@ -1,8 +1,7 @@
 ﻿using DevelopingYou.API.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.Extensions.Hosting;
 
 namespace DevelopingYou.API.Data
 {

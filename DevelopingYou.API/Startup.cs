@@ -1,6 +1,7 @@
 using DevelopingYou.API.Data;
 using DevelopingYou.API.Data.DatabaseRepositories;
 using DevelopingYou.API.Data.Interfaces;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -38,6 +39,19 @@ namespace DevelopingYou.API
 
             services.AddTransient<IGoalRepository, DatabaseGoalRepository>();
             services.AddTransient<IInstanceRepository, DatabaseInstanceRepository>();
+            services.AddTransient<JwtTokenService>();
+
+            // Token creation and authentication injection
+            services.AddAuthentication(options => 
+            { 
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme; 
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme; 
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme; 
+            })
+            .AddJwtBearer(options => 
+            { 
+                options.TokenValidationParameters = JwtTokenService.GetValidationParameters(Configuration); 
+            });
 
         }
 

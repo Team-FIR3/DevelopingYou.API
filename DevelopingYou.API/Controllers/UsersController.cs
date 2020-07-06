@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using DevelopingYou.API.Data.Interfaces;
-using Microsoft.AspNetCore.Http;
+﻿using DevelopingYou.API.Data.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DevelopingYou.API.Controllers
