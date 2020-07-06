@@ -5,7 +5,7 @@ namespace DevelopingYou.API.Models
     public class CreateUser
     {
         [Required]
-        public int Id { get; set; }
+        public string Id { get; set; }
         [Required]
         public string UserName { get; set; }
         [Required]

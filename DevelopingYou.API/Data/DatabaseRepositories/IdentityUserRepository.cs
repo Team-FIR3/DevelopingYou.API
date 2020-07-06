@@ -47,18 +47,12 @@ namespace DevelopingYou.API.Data.DatabaseRepositories
 
             var result = await userManager.CreateAsync(user, data.Password);
 
-            if (result.Succeeded)
-            {
-                await userManager.AddToRolesAsync(user, data.Roles);
-                return await GetUserWithToken(user);
-            }
-
             foreach (var error in result.Errors)
             {
                 var errorKey =
                     error.Code.Contains("Password") ? nameof(data.Password) :
                     error.Code.Contains("Email") ? nameof(data.Email) :
-                    error.Code.Contains("UserName") ? nameof(data.Username) :
+                    error.Code.Contains("UserName") ? nameof(data.UserName) :
                     "";
                 modelState.AddModelError(errorKey, error.Description);
             }
@@ -66,12 +60,12 @@ namespace DevelopingYou.API.Data.DatabaseRepositories
             return null;
         }
 
-        private async Task<UserWithToken> GetUserWithToken(ApplicationUser user)
+        private async Task<UserWithToken> GetUserWithToken(User user)
         {
             return new UserWithToken
             {
                 Id = user.Id,
-                Username = user.UserName,
+                UserName = user.UserName,
                 Token = await tokenService.GetToken(user, TimeSpan.FromMinutes(30))
             };
         }
