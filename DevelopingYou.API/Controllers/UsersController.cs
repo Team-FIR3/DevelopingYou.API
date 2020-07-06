@@ -1,5 +1,8 @@
 ﻿using DevelopingYou.API.Data.Interfaces;
+using DevelopingYou.API.Models.DTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace DevelopingYou.API.Controllers
 {
@@ -12,6 +15,38 @@ namespace DevelopingYou.API.Controllers
         public UsersController(IUserRepository userRepository)
         {
             this.userRepository = userRepository;
+        }
+
+        [HttpPost("Register")]
+        [AllowAnonymous]
+        public async Task<ActionResult<UserWithToken>> Register(RegisterUser data)
+        {
+            var user = await userRepository.Register(data, ModelState);
+            if (user == null)
+            {
+                return BadRequest(new ValidationProblemDetails(ModelState));
+            }
+
+            return user;
+        }
+
+        [HttpPost("Login")]
+        [AllowAnonymous]
+        public async Task<ActionResult<UserWithToken>> Login (LoginUser data)
+        {
+            var user = await userRepository.Authenticate(data.UserName, data.Password);
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+
+            return user;
+        }
+
+        [HttpGet("Self")]
+        public async Task<ActionResult<UserDTO>> Self()
+        {
+            return await userRepository.GetUser(User);
         }
     }
 }
