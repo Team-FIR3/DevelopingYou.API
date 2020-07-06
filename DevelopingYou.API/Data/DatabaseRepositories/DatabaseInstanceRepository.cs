@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 
 
@@ -20,7 +19,7 @@ namespace DevelopingYou.API.Data.DatabaseRepositories
             _context = context;
         }
 
-      
+
 
         public async Task<InstanceDTO> GetInstanceById(int id)
         {
@@ -74,7 +73,7 @@ namespace DevelopingYou.API.Data.DatabaseRepositories
             var instance = await _context.Instance
                 .FirstOrDefaultAsync(instance => instance.Id == id && instance.StartTime == instanceData.StartTime);
 
-            if(instance is null) return false;
+            if (instance is null) return false;
             instance.StartTime = instanceData.StartTime;
             instance.EndTime = instanceData.EndTime;
             instance.Comment = instanceData.Comment;
@@ -83,7 +82,7 @@ namespace DevelopingYou.API.Data.DatabaseRepositories
 
             await _context.SaveChangesAsync();
             return true;
-            
+
         }
         public async Task<InstanceDTO> DeleteInstance(int id)
         {

@@ -46,7 +46,7 @@ namespace DevelopingYou.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutInstance(int id, DateTime startTime, CreateInstance instanceData)
         {
-            if (startTime != instanceData.StartTime )
+            if (startTime != instanceData.StartTime)
             {
                 return BadRequest();
             }

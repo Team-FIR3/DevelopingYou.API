@@ -54,9 +54,19 @@ namespace DevelopingYou.API.Data
                     Comment = "Coffee Zoom Meeting, beneficial networking",
                 }
                 );
+
+            modelBuilder.Entity<User>()
+                .HasData(new User
+                {
+                    Id = 1,
+                    UserName = "Stacey",
+                    Password = "P@ssw0rd",
+                    Email = "stacey.teltser@gmail.com",
+                });
         }
 
         public DbSet<Goal> Goal { get; set; }
         public DbSet<Instance> Instance { get; set; }
+        public DbSet<User> User { get; set; }
     }
 }
