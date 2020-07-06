@@ -1,9 +1,11 @@
 using DevelopingYou.API.Data;
 using DevelopingYou.API.Data.DatabaseRepositories;
 using DevelopingYou.API.Data.Interfaces;
+using DevelopingYou.API.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -33,6 +35,13 @@ namespace DevelopingYou.API
                     .GetConnectionString("DefaultConnection");
                 options.UseSqlServer(connectionString);
             });
+
+            services
+                .AddIdentity<User, IdentityRole>(options =>
+                {
+                    options.User.RequireUniqueEmail = true;
+                })
+                .AddEntityFrameworkStores<DiscoveringYouDBContext>();
 
             // TODO:
             // Insert dependency injection here
