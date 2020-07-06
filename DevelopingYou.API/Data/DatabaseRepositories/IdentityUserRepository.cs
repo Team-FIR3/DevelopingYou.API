@@ -32,7 +32,7 @@ namespace DevelopingYou.API.Data.DatabaseRepositories
             return await GetUserWithToken(user);
         }
 
-        public async Task<User> GetUser(ClaimsPrincipal user)
+        public async Task<UserDTO> GetUser(ClaimsPrincipal user)
         {
             return await userManager.GetUserAsync(user);
         }
