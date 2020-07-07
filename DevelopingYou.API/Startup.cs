@@ -81,7 +81,12 @@ namespace DevelopingYou.API
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
-            app.UseCors();
+
+            app.UseCors(options => {
+                options.AllowAnyOrigin();
+                options.AllowAnyMethod();
+                options.AllowAnyHeader();
+            });
 
             app.UseEndpoints(endpoints =>
             {
