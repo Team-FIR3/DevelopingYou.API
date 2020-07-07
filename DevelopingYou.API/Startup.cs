@@ -57,15 +57,15 @@ namespace DevelopingYou.API
             services.AddTransient<JwtTokenService>();
 
             // Token creation and authentication injection
-            services.AddAuthentication(options => 
-            { 
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme; 
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme; 
-                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme; 
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
             })
-            .AddJwtBearer(options => 
-            { 
-                options.TokenValidationParameters = JwtTokenService.GetValidationParameters(Configuration); 
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = JwtTokenService.GetValidationParameters(Configuration);
             });
 
         }
@@ -115,4 +115,6 @@ namespace DevelopingYou.API
                     [scheme] = new List<string>()
                 });
             }
+        }
+    }
 }
