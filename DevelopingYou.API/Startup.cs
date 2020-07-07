@@ -48,6 +48,7 @@ namespace DevelopingYou.API
 
             services.AddTransient<IGoalRepository, DatabaseGoalRepository>();
             services.AddTransient<IInstanceRepository, DatabaseInstanceRepository>();
+            services.AddTransient<IUserRepository, IdentityUserRepository>();
             services.AddTransient<JwtTokenService>();
 
             // Token creation and authentication injection
