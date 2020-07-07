@@ -5,7 +5,7 @@ using System;
 
 namespace DevelopingYou.API.Data
 {
-    public class DiscoveringYouDBContext : IdentityDbContext
+    public class DiscoveringYouDBContext : IdentityDbContext<User>
     {
         public DiscoveringYouDBContext(DbContextOptions options) : base(options)
         {
