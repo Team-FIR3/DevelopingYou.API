@@ -43,10 +43,12 @@ namespace DevelopingYou.API.Data.DatabaseRepositories
             {
                 Email = data.Email,
                 UserName = data.UserName,
-                PasswordHash = data.Password,
             };
 
             var result = await userManager.CreateAsync(user, data.Password);
+
+            if (result.Succeeded)
+                return await GetUserWithToken(user);
 
             foreach (var error in result.Errors)
             {
