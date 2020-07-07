@@ -86,6 +86,7 @@ namespace DevelopingYou.API
                 options.AllowAnyOrigin();
                 options.AllowAnyMethod();
                 options.AllowAnyHeader();
+                options.AllowCredentials();
             });
 
             app.UseEndpoints(endpoints =>
