@@ -29,6 +29,8 @@ namespace DevelopingYou.API.Models
 
         public ICollection<Instance> Instances { get; set; }
 
+        public bool Completed { get; set; }
+
     }
 
 
