@@ -47,9 +47,11 @@ namespace DevelopingYou.API.Controllers
         /// This route doesn't function correctly yet but I don't think we need it formally
         /// </summary>
         /// <returns></returns>
+        [Authorize]
         [HttpGet("Self")]
         public async Task<ActionResult<UserDTO>> Self()
         {
+
             return await userRepository.GetUser(User);
         }
     }
