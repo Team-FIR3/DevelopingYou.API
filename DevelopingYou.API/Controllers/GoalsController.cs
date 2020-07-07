@@ -1,12 +1,14 @@
 ﻿using DevelopingYou.API.Data.Interfaces;
 using DevelopingYou.API.Models;
 using DevelopingYou.API.Models.DTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace DevelopingYou.API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class GoalsController : ControllerBase
