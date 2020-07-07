@@ -1,8 +1,11 @@
 using DevelopingYou.API.Data;
 using DevelopingYou.API.Data.DatabaseRepositories;
 using DevelopingYou.API.Data.Interfaces;
+using DevelopingYou.API.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -33,11 +36,32 @@ namespace DevelopingYou.API
                 options.UseSqlServer(connectionString);
             });
 
+            services
+                .AddIdentity<User, IdentityRole>(options =>
+                {
+                    options.User.RequireUniqueEmail = true;
+                })
+                .AddEntityFrameworkStores<DiscoveringYouDBContext>();
+
             // TODO:
             // Insert dependency injection here
 
             services.AddTransient<IGoalRepository, DatabaseGoalRepository>();
             services.AddTransient<IInstanceRepository, DatabaseInstanceRepository>();
+            services.AddTransient<IUserRepository, IdentityUserRepository>();
+            services.AddTransient<JwtTokenService>();
+
+            // Token creation and authentication injection
+            services.AddAuthentication(options => 
+            { 
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme; 
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme; 
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme; 
+            })
+            .AddJwtBearer(options => 
+            { 
+                options.TokenValidationParameters = JwtTokenService.GetValidationParameters(Configuration); 
+            });
 
         }
 
@@ -52,6 +76,7 @@ namespace DevelopingYou.API
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {

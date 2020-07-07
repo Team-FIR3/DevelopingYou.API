@@ -1,10 +1,11 @@
 ﻿using DevelopingYou.API.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 
 namespace DevelopingYou.API.Data
 {
-    public class DiscoveringYouDBContext : DbContext
+    public class DiscoveringYouDBContext : IdentityDbContext<User>
     {
         public DiscoveringYouDBContext(DbContextOptions options) : base(options)
         {
@@ -12,6 +13,8 @@ namespace DevelopingYou.API.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<Goal>()
                 .HasData(new Goal
                 {

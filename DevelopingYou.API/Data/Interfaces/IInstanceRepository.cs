@@ -14,7 +14,7 @@ namespace DevelopingYou.API.Data.Interfaces
         Task<IEnumerable<InstanceDTO>> GetInstances();
 
         //Update
-        Task<bool> UpdateInstance(int id,DateTime startTime, CreateInstance instanceData);
+        Task<bool> UpdateInstance(int id, DateTime startTime, CreateInstance instanceData);
         Task<InstanceDTO> SaveNewInstance(int id, CreateInstance instanceData);
 
         //Delete
