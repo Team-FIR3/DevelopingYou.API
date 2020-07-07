@@ -3,6 +3,7 @@ using DevelopingYou.API.Data.DatabaseRepositories;
 using DevelopingYou.API.Data.Interfaces;
 using DevelopingYou.API.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -10,6 +11,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace DevelopingYou.API
 {
@@ -52,15 +55,15 @@ namespace DevelopingYou.API
             services.AddTransient<JwtTokenService>();
 
             // Token creation and authentication injection
-            services.AddAuthentication(options => 
-            { 
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme; 
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme; 
-                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme; 
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
             })
-            .AddJwtBearer(options => 
-            { 
-                options.TokenValidationParameters = JwtTokenService.GetValidationParameters(Configuration); 
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = JwtTokenService.GetValidationParameters(Configuration);
             });
 
         }
@@ -77,6 +80,8 @@ namespace DevelopingYou.API
             app.UseStaticFiles();
             app.UseRouting();
             app.UseAuthentication();
+            app.UseAuthorization();
+            app.UseCors();
 
             app.UseEndpoints(endpoints =>
             {
