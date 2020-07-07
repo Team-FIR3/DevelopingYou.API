@@ -47,6 +47,7 @@ namespace DevelopingYou.API.Controllers
         [HttpGet("Self")]
         public async Task<ActionResult<UserDTO>> Self()
         {
+
             return await userRepository.GetUser(User);
         }
     }
