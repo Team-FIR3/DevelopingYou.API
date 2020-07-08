@@ -45,6 +45,14 @@ namespace DevelopingYou.API.Data.DatabaseRepositories
                 })
                 .ToListAsync();
 
+            foreach (var goal in goals)
+            {
+                if (goal.EndDate < DateTime.Now)
+                {
+                    goal.Completed = true;
+                }
+            }
+
             return goals;
         }
 
