@@ -11,7 +11,7 @@ namespace DevelopingYou.API.Data.Interfaces
 
         Task<GoalDTO> GetGoalById(int id);
 
-        Task<Goal> SaveNewGoal(Goal goal);
+        Task<GoalDTO> SaveNewGoal(GoalDTO goal);
 
         Task<bool> UpdateGoal(int id, Goal goal);
 

@@ -22,5 +22,7 @@ namespace DevelopingYou.API.Models.DTOs
         public Category Category { get; set; }
 
         public List<InstanceDTO> Instances { get; set; }
+
+        public bool Completed { get; set; }
     }
 }
