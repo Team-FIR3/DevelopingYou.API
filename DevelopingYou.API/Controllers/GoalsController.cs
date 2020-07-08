@@ -50,7 +50,7 @@ namespace DevelopingYou.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Goal>> PostGoal(Goal goal)
+        public async Task<ActionResult<GoalDTO>> PostGoal(GoalDTO goal)
         {
             goal.UserId = GetUserId();
             await goalRepository.SaveNewGoal(goal);

@@ -78,11 +78,24 @@ namespace DevelopingYou.API.Data.DatabaseRepositories
             return goal;
         }
 
-        public async Task<Goal> SaveNewGoal(Goal goal)
+        public async Task<GoalDTO> SaveNewGoal(GoalDTO goal)
         {
-            _context.Goal.Add(goal);
+            var newGoal = new Goal
+            {
+                Id = goal.Id,
+                Title = goal.Title,
+                UserId = goal.UserId,
+                StartDate = goal.StartDate,
+                EndDate = goal.EndDate,
+                StartValue = goal.StartValue,
+                TargetValue = goal.TargetValue,
+                Category = goal.Category,
+                Completed = goal.Completed,
+            };
+
+            _context.Goal.Add(newGoal);
             await _context.SaveChangesAsync();
-            return goal;
+            return await GetGoalById(goal.Id);
         }
 
         public async Task<bool> UpdateGoal(int id, Goal goal)

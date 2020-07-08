@@ -16,13 +16,6 @@ namespace DevelopingYou.API.Migrations
                 oldClrType: typeof(int),
                 oldType: "int");
 
-            migrationBuilder.UpdateData(
-                table: "Goal",
-                keyColumn: "Id",
-                keyValue: 1,
-                column: "UserId",
-                value: null);
-
             migrationBuilder.CreateIndex(
                 name: "IX_Goal_UserId",
                 table: "Goal",
