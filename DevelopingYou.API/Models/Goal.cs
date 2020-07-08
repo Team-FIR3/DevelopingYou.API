@@ -7,7 +7,7 @@ namespace DevelopingYou.API.Models
     public class Goal
     {
         public int Id { get; set; }
-
+        [Required]
         public string UserId { get; set; }
 
         [Required]
