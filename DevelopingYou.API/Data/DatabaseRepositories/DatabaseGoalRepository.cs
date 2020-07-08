@@ -47,7 +47,7 @@ namespace DevelopingYou.API.Data.DatabaseRepositories
 
             foreach (var goal in goals)
             {
-                if (goal.EndDate < DateTime.Now)
+                if (goal.EndDate <= DateTime.Now)
                 {
                     goal.Completed = true;
                 }
