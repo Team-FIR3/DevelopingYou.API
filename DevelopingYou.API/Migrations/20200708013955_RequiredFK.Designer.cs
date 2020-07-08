@@ -4,14 +4,16 @@ using DevelopingYou.API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DevelopingYou.API.Migrations
 {
     [DbContext(typeof(DiscoveringYouDBContext))]
-    partial class DiscoveringYouDBContextModelSnapshot : ModelSnapshot
+    [Migration("20200708013955_RequiredFK")]
+    partial class RequiredFK
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,7 +51,6 @@ namespace DevelopingYou.API.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
@@ -57,6 +58,19 @@ namespace DevelopingYou.API.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Goal");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Category = 4,
+                            Completed = false,
+                            EndDate = new DateTime(2020, 6, 16, 1, 45, 12, 0, DateTimeKind.Utc),
+                            StartDate = new DateTime(2020, 6, 12, 2, 45, 12, 0, DateTimeKind.Utc),
+                            StartValue = 5m,
+                            TargetValue = 2m,
+                            Title = "Less social media"
+                        });
                 });
 
             modelBuilder.Entity("DevelopingYou.API.Models.Instance", b =>
@@ -86,6 +100,35 @@ namespace DevelopingYou.API.Migrations
                     b.HasIndex("GoalId");
 
                     b.ToTable("Instance");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Comment = "Played Candy Crush instead of coding, could have utilized my time better",
+                            EndTime = new DateTime(2020, 6, 13, 4, 45, 12, 0, DateTimeKind.Utc),
+                            GoalId = 1,
+                            GoalTitle = "Less social media",
+                            StartTime = new DateTime(2020, 6, 13, 4, 30, 12, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Comment = "Video called sister and nephew, was fun",
+                            EndTime = new DateTime(2020, 6, 13, 7, 0, 12, 0, DateTimeKind.Utc),
+                            GoalId = 1,
+                            GoalTitle = "Less social media",
+                            StartTime = new DateTime(2020, 6, 13, 6, 5, 12, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Comment = "Coffee Zoom Meeting, beneficial networking",
+                            EndTime = new DateTime(2020, 6, 13, 10, 0, 12, 0, DateTimeKind.Utc),
+                            GoalId = 1,
+                            GoalTitle = "Less social media",
+                            StartTime = new DateTime(2020, 6, 13, 9, 0, 12, 0, DateTimeKind.Utc)
+                        });
                 });
 
             modelBuilder.Entity("DevelopingYou.API.Models.User", b =>
@@ -288,9 +331,7 @@ namespace DevelopingYou.API.Migrations
                 {
                     b.HasOne("DevelopingYou.API.Models.User", null)
                         .WithMany("Goals")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("DevelopingYou.API.Models.Instance", b =>

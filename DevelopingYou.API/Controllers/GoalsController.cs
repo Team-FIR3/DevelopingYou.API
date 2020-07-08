@@ -4,6 +4,7 @@ using DevelopingYou.API.Models.DTOs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace DevelopingYou.API.Controllers
@@ -51,6 +52,7 @@ namespace DevelopingYou.API.Controllers
         [HttpPost]
         public async Task<ActionResult<Goal>> PostGoal(Goal goal)
         {
+            goal.UserId = GetUserId();
             await goalRepository.SaveNewGoal(goal);
 
             return CreatedAtAction("GetGoal", new { id = goal.Id }, goal);
@@ -86,5 +88,12 @@ namespace DevelopingYou.API.Controllers
 
             return goal;
         }
+        private string GetUserId()
+        {
+            ClaimsIdentity identity = (ClaimsIdentity)User.Identity;
+            Claim userIdClaim = identity.FindFirst(ClaimTypes.NameIdentifier);
+            return userIdClaim?.Value;
+        }
+
     }
 }
