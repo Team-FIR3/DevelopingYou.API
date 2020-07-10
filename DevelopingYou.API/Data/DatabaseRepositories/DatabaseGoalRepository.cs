@@ -83,6 +83,11 @@ namespace DevelopingYou.API.Data.DatabaseRepositories
                 })
                 .FirstOrDefaultAsync(goal => goal.Id == id);
 
+            if (goal.EndDate <= DateTime.Now)
+            {
+                goal.Completed = true;
+            }
+
             return goal;
         }
 
