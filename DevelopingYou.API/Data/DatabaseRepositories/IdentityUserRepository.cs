@@ -69,7 +69,7 @@ namespace DevelopingYou.API.Data.DatabaseRepositories
             {
                 Id = user.Id,
                 UserName = user.UserName,
-                Token = await tokenService.GetToken(user, TimeSpan.FromMinutes(240))
+                Token = await tokenService.GetToken(user, TimeSpan.FromMinutes(60))
             };
         }
     }
